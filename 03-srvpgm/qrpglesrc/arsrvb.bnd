@@ -1,0 +1,14 @@
+/* ================================================================ */
+/* ARSRVB - binder source of service program ARSRV                  */
+/* New procedures are added at the END of the list only; a change   */
+/* that removes or reorders exports needs a new *CURRENT signature  */
+/* and the old list kept as PGMLVL(*PRV).                           */
+/* ================================================================ */
+STRPGMEXP  PGMLVL(*CURRENT) SIGNATURE('ARSRV V1.00')
+  EXPORT     SYMBOL('AR_validatePayment')
+  EXPORT     SYMBOL('AR_applyAmount')
+  EXPORT     SYMBOL('AR_customerStatus')
+  EXPORT     SYMBOL('AR_daysPastDue')
+  EXPORT     SYMBOL('AR_ageBucket')
+  EXPORT     SYMBOL('AR_customerName')
+ENDPGMEXP

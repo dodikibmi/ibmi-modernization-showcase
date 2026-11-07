@@ -1,0 +1,12 @@
+     A* ARINVP - Invoices (fictional data)
+     A                                      UNIQUE
+     A          R ARINVR                    TEXT('Invoice')
+     A            INCUST         6S 0       COLHDG('Customer')
+     A            ININV          7S 0       COLHDG('Invoice')
+     A            INIDAT         8S 0       COLHDG('Invoice date' 'YYYYMMDD')
+     A            INDUE          8S 0       COLHDG('Due date' 'YYYYMMDD')
+     A            INAMT          9P 2       COLHDG('Amount')
+     A            INPAID         9P 2       COLHDG('Paid')
+     A            INLPDT         8S 0       COLHDG('Last payment' 'YYYYMMDD')
+     A            INSTS          1A         COLHDG('Status' 'O/P')
+     A          K ININV

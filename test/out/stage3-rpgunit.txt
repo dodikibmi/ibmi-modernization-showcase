@@ -1,0 +1,2 @@
+RUCALLTST TSTPGM(DODIKIBMI1/ARSRVT)          (PUB400, 07/11/2026)
+Success. 20 test cases, 28 assertions, 0 failure, 0 error.

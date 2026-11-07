@@ -1,0 +1,222 @@
+
+=== GET /health
+--- HTTP 200
+{
+  "status": "ok",
+  "programs": "DODIKIBMI1",
+  "data": "DODIKIBMI2"
+}
+
+=== GET /customers/100100?asof=2026-10-31
+--- HTTP 200
+{
+  "customer": 100100,
+  "name": "ARUNA TRADING (FICTIONAL)",
+  "status": "A",
+  "credit_limit": 50000.0,
+  "balance": 3850.0,
+  "as_of": "2026-10-31",
+  "open_invoices": [
+    {
+      "invoice": 2600101,
+      "invoice_date": "2026-07-01",
+      "due_date": "2026-07-31",
+      "open_amount": 1200.0,
+      "days_past_due": 92,
+      "bucket": "over_90"
+    },
+    {
+      "invoice": 2600102,
+      "invoice_date": "2026-08-15",
+      "due_date": "2026-09-14",
+      "open_amount": 500.0,
+      "days_past_due": 47,
+      "bucket": "days_31_60"
+    },
+    {
+      "invoice": 2600103,
+      "invoice_date": "2026-10-01",
+      "due_date": "2026-10-31",
+      "open_amount": 1500.0,
+      "days_past_due": 0,
+      "bucket": "current"
+    },
+    {
+      "invoice": 2600104,
+      "invoice_date": "2026-10-20",
+      "due_date": "2026-11-19",
+      "open_amount": 650.0,
+      "days_past_due": -19,
+      "bucket": "current"
+    }
+  ]
+}
+
+=== POST /payments  {"customer": 100100, "amount": 1500.0, "date": "2026-10-25"}
+--- HTTP 201
+{
+  "batch": 2,
+  "sequence": 1,
+  "customer": 100100,
+  "amount": 1500.0,
+  "status": "posted",
+  "message": null,
+  "customer_balance": 2350.0,
+  "customer_status": "A"
+}
+
+=== POST /payments  {"customer": 100200, "amount": 3000.0, "date": "2026-10-26"}
+--- HTTP 201
+{
+  "batch": 2,
+  "sequence": 2,
+  "customer": 100200,
+  "amount": 3000.0,
+  "status": "posted",
+  "message": null,
+  "customer_balance": 0.0,
+  "customer_status": "A"
+}
+
+=== POST /payments  {"customer": 100300, "amount": 2000.0, "date": "2026-10-27"}
+--- HTTP 201
+{
+  "batch": 2,
+  "sequence": 3,
+  "customer": 100300,
+  "amount": 2000.0,
+  "status": "posted",
+  "message": "UNAPPLIED CREDIT",
+  "customer_balance": -550.0,
+  "customer_status": "A"
+}
+
+=== POST /payments  {"customer": 999999, "amount": 100.0, "date": "2026-10-27"}
+--- HTTP 404
+{
+  "error": "customer not found"
+}
+
+=== POST /payments  {"customer": 100500, "amount": 0.0, "date": "2026-10-28"}
+--- HTTP 422
+{
+  "error": "invalid amount"
+}
+
+=== POST /payments  {"customer": 100500, "amount": 400.0, "date": "2026-10-28"}
+--- HTTP 201
+{
+  "batch": 2,
+  "sequence": 4,
+  "customer": 100500,
+  "amount": 400.0,
+  "status": "posted",
+  "message": null,
+  "customer_balance": 1600.0,
+  "customer_status": "A"
+}
+
+=== POST /payments  {"customer": 100100, "amount": -50.0, "date": "2026-10-29"}
+--- HTTP 422
+{
+  "error": "invalid amount"
+}
+
+=== POST /payments  {"customer": 100100}
+--- HTTP 422
+{
+  "error": "amount must be a number"
+}
+
+=== GET /customers/100100?asof=2026-10-31
+--- HTTP 200
+{
+  "customer": 100100,
+  "name": "ARUNA TRADING (FICTIONAL)",
+  "status": "A",
+  "credit_limit": 50000.0,
+  "balance": 2350.0,
+  "as_of": "2026-10-31",
+  "open_invoices": [
+    {
+      "invoice": 2600102,
+      "invoice_date": "2026-08-15",
+      "due_date": "2026-09-14",
+      "open_amount": 200.0,
+      "days_past_due": 47,
+      "bucket": "days_31_60"
+    },
+    {
+      "invoice": 2600103,
+      "invoice_date": "2026-10-01",
+      "due_date": "2026-10-31",
+      "open_amount": 1500.0,
+      "days_past_due": 0,
+      "bucket": "current"
+    },
+    {
+      "invoice": 2600104,
+      "invoice_date": "2026-10-20",
+      "due_date": "2026-11-19",
+      "open_amount": 650.0,
+      "days_past_due": -19,
+      "bucket": "current"
+    }
+  ]
+}
+
+=== GET /aging?asof=2026-10-31
+--- HTTP 200
+{
+  "as_of": "2026-10-31",
+  "customers": [
+    {
+      "customer": 100100,
+      "name": "ARUNA TRADING (FICTIONAL)",
+      "current": 2150.0,
+      "days_1_30": 0.0,
+      "days_31_60": 200.0,
+      "days_61_90": 0.0,
+      "over_90": 0.0,
+      "open_amount": 2350.0
+    },
+    {
+      "customer": 100500,
+      "name": "EKA FOODS (FICTIONAL)",
+      "current": 1100.0,
+      "days_1_30": 500.0,
+      "days_31_60": 0.0,
+      "days_61_90": 0.0,
+      "over_90": 0.0,
+      "open_amount": 1600.0
+    },
+    {
+      "customer": 100600,
+      "name": "*UNKNOWN*",
+      "current": 0.0,
+      "days_1_30": 0.0,
+      "days_31_60": 250.0,
+      "days_61_90": 0.0,
+      "over_90": 0.0,
+      "open_amount": 250.0
+    }
+  ],
+  "total": {
+    "current": 3250.0,
+    "days_1_30": 500.0,
+    "days_31_60": 450.0,
+    "days_61_90": 0.0,
+    "over_90": 0.0,
+    "open_amount": 4200.0
+  }
+}
+
+=== GET /nothing
+--- HTTP 404
+{
+  "error": "no such endpoint"
+}
+
+=== summary
+payment statuses [201, 201, 201, 404, 422, 201, 422] expected [201, 201, 201, 404, 422, 201, 422] OK
+aging total {"current": 3250.0, "days_1_30": 500.0, "days_31_60": 450.0, "days_61_90": 0.0, "over_90": 0.0, "open_amount": 4200.0}

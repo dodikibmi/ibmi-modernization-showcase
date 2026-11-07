@@ -1,0 +1,16 @@
+Record format level identifiers (DSPFD TYPE(*RCDFMT), PUB400, 07/11/2026)
+
+File      Format    DDS (before)    After stage 2                          Object after stage 2
+ARCUSTP   ARCUSTR   379BF4A6B932F   379BF4A6B932F  same                    SQL index RCDFMT over AR_CUSTOMER
+ARINVP    ARINVR    488BA4457B8BB   488BA4457B8BB  same                    DDS LF over AR_INVOICES
+ARINVL1   ARINVR    488BA4457B8BB   488BA4457B8BB  same                    DDS LF over AR_INVOICES
+ARPAYP    ARPAYR    45461E71550F8   45461E71550F8  same                    SQL index RCDFMT over AR_PAYMENTS
+
+First attempt used SQL indexes for all four files:
+ARINVP    ARINVR    488BA4457B8BB   3F660D95515BC  CHANGED  key ININV is field 2 -> index moved it to field 1
+ARINVL1   ARINVR    488BA4457B8BB   4C5C88540A75B  CHANGED  keys are fields 1, 4, 2 -> index moved them first
+An SQL index always places its key columns first in its record format.
+
+Programs compiled against the DDS files (DSPPGMREF) and run unchanged on the SQL tables:
+ARR200, ARR300 (legacy) and ARR210, ARR310 (stage 1) -> test/out/stage2-legacy.txt, stage2-free.txt,
+both identical to test/out/legacy.txt.

@@ -1,0 +1,16 @@
+     A* ARINVL1LF - creates object ARINVL1: invoices by customer, due date,
+     A* invoice - DDS logical file over SQL table AR_INVOICES (ARINV),
+     A* same field order as before, so the level identifier is unchanged.
+     A* CRTLF FILE(DODIKIBMI2/ARINVL1) SRCMBR(ARINVL1LF)
+     A          R ARINVR                    PFILE(ARINV)
+     A            INCUST
+     A            ININV
+     A            INIDAT
+     A            INDUE
+     A            INAMT
+     A            INPAID
+     A            INLPDT
+     A            INSTS
+     A          K INCUST
+     A          K INDUE
+     A          K ININV

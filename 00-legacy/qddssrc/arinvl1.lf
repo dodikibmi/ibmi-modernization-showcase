@@ -1,0 +1,5 @@
+     A* ARINVL1 - Invoices by customer, due date, invoice
+     A          R ARINVR                    PFILE(ARINVP)
+     A          K INCUST
+     A          K INDUE
+     A          K ININV

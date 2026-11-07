@@ -1,0 +1,17 @@
+     A* ARINVPLF - creates object ARINVP: old invoice file name, now a
+     A* DDS logical file over SQL table AR_INVOICES (system name ARINV).
+     A* An SQL index puts its key columns first in the record format, so
+     A* for ARINVP (key ININV = 2nd field) the level identifier would
+     A* change; a DDS LF keeps the old field order -> same level id.
+     A* CRTLF FILE(DODIKIBMI2/ARINVP) SRCMBR(ARINVPLF)
+     A                                      UNIQUE
+     A          R ARINVR                    PFILE(ARINV)
+     A            INCUST
+     A            ININV
+     A            INIDAT
+     A            INDUE
+     A            INAMT
+     A            INPAID
+     A            INLPDT
+     A            INSTS
+     A          K ININV

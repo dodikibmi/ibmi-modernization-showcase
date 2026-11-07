@@ -1,0 +1,9 @@
+     A* ARCUSTP - Customer master (fictional data)
+     A                                      UNIQUE
+     A          R ARCUSTR                   TEXT('Customer master')
+     A            CUCUST         6S 0       COLHDG('Customer')
+     A            CUNAME        30A         COLHDG('Name')
+     A            CUCRLM         9P 2       COLHDG('Credit limit')
+     A            CUBAL         11P 2       COLHDG('Balance')
+     A            CUSTAT         1A         COLHDG('Status' 'A/H')
+     A          K CUCUST

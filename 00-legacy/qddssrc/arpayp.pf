@@ -1,0 +1,12 @@
+     A* ARPAYP - Payments received, posted by ARR200 (fictional data)
+     A                                      UNIQUE
+     A          R ARPAYR                    TEXT('Payment')
+     A            PYBAT          5S 0       COLHDG('Batch')
+     A            PYSEQ          5S 0       COLHDG('Seq')
+     A            PYCUST         6S 0       COLHDG('Customer')
+     A            PYDATE         8S 0       COLHDG('Pay date' 'YYYYMMDD')
+     A            PYAMT          9P 2       COLHDG('Amount')
+     A            PYSTS          1A         COLHDG('Status' 'blank/P/E')
+     A            PYMSG         30A         COLHDG('Message')
+     A          K PYBAT
+     A          K PYSEQ

@@ -1,0 +1,48 @@
+     A* ARR310P - Aged trial balance, 132 columns (stage 1)
+     A* Same layout as the O-specs of legacy ARR300, generated from one table
+     A          R H1                        SKIPB(1) SPACEA(2)
+     A                                     1'AGED TRIAL BALANCE'
+     A                                    41'AS OF'
+     A            WASOF          8S 0     47EDTWRD('0   -  -  ')
+     A                                   120'PAGE'
+     A                                   125PAGNBR
+     A                                      EDTCDE(Z)
+     A          R H2                        SPACEA(2)
+     A                                     1'CUSTOMER / INVOICE'
+     A                                    22'INV DATE'
+     A                                    34'DUE DATE'
+     A                                    45'DAYS'
+     A                                    56'CURRENT'
+     A                                    68'1-30 DAYS'
+     A                                    81'31-60 DAYS'
+     A                                    95'61-90 DAYS'
+     A                                   107'OVER 90 DAYS'
+     A                                   122'OPEN AMOUNT'
+     A          R D1                        SPACEA(1)
+     A            ININV          7S 0     10EDTCDE(Z)
+     A            INIDAT         8S 0     20EDTWRD('0   -  -  ')
+     A            INDUE          8S 0     32EDTWRD('0   -  -  ')
+     A            WDAYS          5S 0     43EDTCDE(L)
+     A            D1CUR          9S 2     50EDTCDE(K)
+     A            D1030          9S 2     64EDTCDE(K)
+     A            D1060          9S 2     78EDTCDE(K)
+     A            D1090          9S 2     92EDTCDE(K)
+     A            D1OVR          9S 2    106EDTCDE(K)
+     A            WOPEN          9S 2    120EDTCDE(K)
+     A          R T1                        SPACEA(2)
+     A            CUCUST         6S 0      1
+     A            CUNAME        30A        8
+     A            T1CUR         11S 2     48EDTCDE(K)
+     A            T1030         11S 2     62EDTCDE(K)
+     A            T1060         11S 2     76EDTCDE(K)
+     A            T1090         11S 2     90EDTCDE(K)
+     A            T1OVR         11S 2    104EDTCDE(K)
+     A            T1TOT         11S 2    118EDTCDE(K)
+     A          R TL                        SPACEB(1) SPACEA(1)
+     A                                     1'*** GRAND TOTAL ***'
+     A            TLCUR         11S 2     48EDTCDE(J)
+     A            TL030         11S 2     62EDTCDE(J)
+     A            TL060         11S 2     76EDTCDE(J)
+     A            TL090         11S 2     90EDTCDE(J)
+     A            TLOVR         11S 2    104EDTCDE(J)
+     A            TLTOT         11S 2    118EDTCDE(J)

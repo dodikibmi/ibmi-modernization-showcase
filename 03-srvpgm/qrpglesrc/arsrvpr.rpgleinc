@@ -1,0 +1,56 @@
+**FREE
+// =====================================================================
+// ARSRVPR - prototypes and constants of service program ARSRV
+//           (accounts receivable business rules, stage 3)
+// =====================================================================
+/if not defined(ARSRVPR)
+/define ARSRVPR
+
+dcl-c AR_MSG_INVALID_AMOUNT 'INVALID AMOUNT';
+dcl-c AR_MSG_NO_CUSTOMER    'CUSTOMER NOT FOUND';
+dcl-c AR_MSG_UNAPPLIED      'UNAPPLIED CREDIT';
+dcl-c AR_UNKNOWN_CUSTOMER   '*UNKNOWN*';
+
+dcl-c AR_BUCKET_CURRENT 1;
+dcl-c AR_BUCKET_1_30    2;
+dcl-c AR_BUCKET_31_60   3;
+dcl-c AR_BUCKET_61_90   4;
+dcl-c AR_BUCKET_OVER_90 5;
+
+// Reason a payment cannot be posted; '' = it can be posted
+dcl-pr AR_validatePayment varchar(30) extproc(*dclcase);
+  amount        packed(9:2) const;
+  customerFound ind const;
+end-pr;
+
+// Part of the remaining payment that goes to one open invoice
+dcl-pr AR_applyAmount packed(9:2) extproc(*dclcase);
+  remaining  packed(9:2) const;
+  openAmount packed(9:2) const;
+end-pr;
+
+// Customer status after a payment: a customer on hold ('H') is
+// released ('A') when the balance is zero or below
+dcl-pr AR_customerStatus char(1) extproc(*dclcase);
+  status  char(1) const;
+  balance packed(11:2) const;
+end-pr;
+
+// Days past due on the as-of date (negative = not yet due)
+dcl-pr AR_daysPastDue int(10) extproc(*dclcase);
+  asOf   date(*iso) const;
+  dueYmd zoned(8:0) const;
+end-pr;
+
+// Age bucket 1-5 (AR_BUCKET_...) for a number of days past due
+dcl-pr AR_ageBucket int(10) extproc(*dclcase);
+  daysPastDue int(10) const;
+end-pr;
+
+// Name to print for a customer: the name when found, else *UNKNOWN*
+dcl-pr AR_customerName char(30) extproc(*dclcase);
+  found ind const;
+  name  char(30) const;
+end-pr;
+
+/endif
